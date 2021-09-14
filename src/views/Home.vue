@@ -2,11 +2,13 @@
   <div class="flex flex-col h-screen max-h-screen">
     <!-- Begin - Result / Search -->
     <div
-      class="z-20 flex justify-center relative bg-gray-600 bg-cover px-4 pt-8 pb-32"
+      class="z-20 flex justify-center relative bg-action-neutral-data-3 bg-cover px-4 pt-8 pb-32"
     >
       <!-- Begin - Search Input -->
       <div class="w-full max-w-screen-sm">
-        <h1 class="text-white text-center text-3xl pb-4">IP Address Tracker</h1>
+        <h1 class="text-gray-700 text-center text-3xl pb-4">
+          IP Address Tracker
+        </h1>
         <div class="flex">
           <input
             v-model="queryIp"
@@ -44,6 +46,7 @@ export default {
   },
   setup() {
     let mymap;
+    const token = process.env.TOKEN;
     const queryIp = ref("");
     const ipInfo = ref(null);
 
@@ -52,7 +55,7 @@ export default {
 
       leaflet
         .tileLayer(
-          "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaXBheSIsImEiOiJja3RqanJqa2wxY2IyMnFtcmE2cGh6cW9oIn0.nSpvtxhnnhwsRBdIvMnxaQ",
+          `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaXBheSIsImEiOiJja3RqanJqa2wxY2IyMnFtcmE2cGh6cW9oIn0.nSpvtxhnnhwsRBdIvMnxaQ`,
           {
             attribution:
               'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -88,7 +91,7 @@ export default {
         alert(err.message);
       }
     };
-    return { mymap, queryIp, ipInfo, getIpInfo };
+    return { mymap, queryIp, ipInfo, getIpInfo, token };
   },
 };
 </script>
